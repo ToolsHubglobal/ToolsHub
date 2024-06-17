@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+        <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="icon"/> 
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="shortcut icon"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333; /* Set background color for body */
+            color: #fff; /* Set text color */
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative; /* Added for centering QR code */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #qrcode {
+            margin: 20px auto; /* Center the QR code */
+        }
+
+        #downloadBtn {
+            display: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: colorChange 10s infinite alternate; /* Color-changing animation */
+        }
+
+        @keyframes colorChange {
+            0% {
+                background-color: red;
+                color: white;
+            }
+            20% {
+                background-color: green;
+                color: white;
+            }
+            40% {
+                background-color: blue;
+                color: white;
+            }
+            60% {
+                background-color: orange;
+                color: black;
+            }
+            80% {
+                background-color: black;
+                color: white;
+            }
+            100% {
+                background-color: white;
+                color: black;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="background" id="background"></div>
+    <header>
+        <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Help of Life">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <input type="text" id="inputText" placeholder="Enter text or URL">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode"></div>
+        <button id="downloadBtn" onclick="downloadQRCode()">Download QR Code</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <script>
+        // Function to generate floating objects
+        function generateFloatingObjects() {
+            var background = document.getElementById("background");
+            var numObjects = 50; // Number of floating objects
+
+            for (var i = 0; i < numObjects; i++) {
+                var floatingObject = document.createElement("div");
+                floatingObject.className = "floating-object";
+                floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+                floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+                floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+                background.appendChild(floatingObject);
+            }
+        }
+
+        // Call the function to generate floating objects when the page loads
+        window.onload = generateFloatingObjects;
+
+        function generateQRCode() {
+            var inputText = document.getElementById("inputText").value.trim();
+            var qrcodeContainer = document.getElementById("qrcode");
+
+            // Clear any previous QR code
+            qrcodeContainer.innerHTML = '';
+
+            if (inputText !== "") {
+                var qrcode = new QRCode(qrcodeContainer, {
+                    text: inputText,
+                    width: 128, // Reduced size
+                    height: 128, // Reduced size
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+                // Show download button after generating QR code
+                document.getElementById("downloadBtn").style.display = "inline-block";
+            } else {
+                alert("Please enter some text or URL.");
+            }
+        }
+
+        function downloadQRCode() {
+            var qrCodeImage = document.querySelector('#qrcode img');
+            var link = document.createElement('a');
+            link.href = qrCodeImage.src;
+            link.download = 'qrcode.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+    <footer>
+        <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span>
+    </footer>
+</body>
+</html>

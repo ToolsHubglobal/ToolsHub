@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="icon"/> 
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="shortcut icon"/>
+    <title>YouTube Video Info Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Set background color for body */
+            color: #fff; /* Set text color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Preloader styles */
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #212121;
+            z-index: 1000;
+        }
+
+        .central {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+            box-shadow: 0.5em 1em 1em blue,
+                -0.5em 0.5em 1em lime,
+                0.5em -0.5em 1em cyan,
+                -0.5em -0.5em 1em yellow;
+        }
+
+        .external-shadow {
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0.5em 0.5em 3em blue,
+                -0.5em 0.5em 3em lime,
+                0.5em -0.5em 3em cyan,
+                -0.5em -0.5em 3em yellow;
+            z-index: 999;
+            animation: rotate 3s linear infinite;
+        }
+
+        .intern {
+            position: absolute;
+            color: white;
+            z-index: 9999;
+        }
+
+        .intern::before {
+            content: "100%";
+            animation: percent 2s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes percent {
+            0% {
+                content: '0%';
+            }
+
+            25% {
+                content: '25%';
+            }
+
+            33% {
+                content: '33%';
+            }
+
+            42% {
+                content: '42%';
+            }
+
+            51% {
+                content: '51%';
+            }
+
+            67% {
+                content: '67%';
+            }
+
+            74% {
+                content: '74%';
+            }
+
+            75% {
+                content: '75%';
+            }
+
+            86% {
+                content: '86%';
+            }
+
+            95% {
+                content: '95%';
+            }
+
+            98% {
+                content: '98%';
+            }
+
+            99% {
+                content: '99%';
+            }
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .video-info {
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333; /* Text color inside the video info section */
+        }
+
+        .header {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .download-button {
+            display: block;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite; /* Animation for color changing */
+        }
+
+        @keyframes changeColor {
+            0% {
+                background-color: red; /* Start background color */
+                color: white; /* Start text color */
+            }
+
+            17% {
+                background-color: green; /* Green background color */
+                color: black; /* Black text color */
+            }
+
+            33% {
+                background-color: blue; /* Blue background color */
+                color: orange; /* Orange text color */
+            }
+
+            50% {
+                background-color: orange; /* Orange background color */
+                color: blue; /* Blue text color */
+            }
+
+            67% {
+                background-color: black; /* Black background color */
+                color: green; /* Green text color */
+            }
+
+            83% {
+                background-color: white; /* White background color */
+                color: red; /* Red text color */
+            }
+
+            100% {
+                background-color: red; /* End background color (same as start) */
+                color: white; /* End text color (same as start) */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="loader">
+        <div class="intern"></div>
+        <div class="external-shadow">
+                       <div class="central"></div>
+        </div>
+    </div>
+    <!-- End of Preloader -->
+
+    <header>
+        <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Help of Life">
+        <nav>
+            <ul>
+                <li><a href="http://helpoflife.unaux.com/">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="background" id="background"></div>
+    <div class="container">
+        <h1>YouTube Video Info Extractor</h1>
+        <input type="text" id="videoUrl" placeholder="Enter YouTube video URL">
+        <button onclick="getVideoInfo()">Get Info</button>
+        
+        <div class="video-info" id="videoInfo">
+            <div class="header">Title</div>
+            <h2 id="title"></h2>
+            <button class="copy-button" onclick="copyText('title')">Copy</button>
+            
+            <div class="header">Description</div>
+            <p id="description"></p>
+            <button class="copy-button" onclick="copyText('description')">Copy</button>
+            
+            <div class="header">Thumbnail</div>
+            <img id="thumbnail" src="" alt="Video Thumbnail">
+            <a id="downloadButton" class="download-button" style="display: none;" download>Download Thumbnail</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to generate floating objects
+        function generateFloatingObjects() {
+            var background = document.getElementById("background");
+            var numObjects = 50; // Number of floating objects
+
+            for (var i = 0; i < numObjects; i++) {
+                var floatingObject = document.createElement("div");
+                floatingObject.className = "floating-object";
+                floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+                floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+                floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+                background.appendChild(floatingObject);
+            }
+        }
+
+        // Call the function to generate floating objects when the page loads
+        window.onload = function() {
+            generateFloatingObjects();
+            // Hide the loader once the page content is fully loaded
+            var loader = document.querySelector('.loader');
+            loader.style.display = 'none';
+        };
+
+        async function getVideoInfo() {
+            const videoUrl = document.getElementById('videoUrl').value;
+            const videoId = getVideoId(videoUrl);
+
+            if (videoId) {
+                const apiKey = 'AIzaSyCZIBR7jI-i1fzNqmChMDichPQ0b09N1rU';
+                const apiUrl = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
+
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    
+                    if (data.items.length > 0) {
+                        const videoDetails = data.items[0].snippet;
+                        document.getElementById('title').innerText = videoDetails.title;
+                        document.getElementById('description').innerText = videoDetails.description;
+                        document.getElementById('thumbnail').src = videoDetails.thumbnails.high.url;
+
+                        // Show download button
+                        document.getElementById('downloadButton').style.display = 'block';
+                        // Set download link
+                        const downloadLink = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+                        document.getElementById('downloadButton').href = downloadLink;
+                    } else {
+                        alert('No video found for the provided URL.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching video data:', error);
+                    alert('Failed to fetch video details.');
+                }
+            } else {
+                alert('Invalid YouTube URL.');
+            }
+        }
+
+        function getVideoId(url) {
+            const urlParams = new URLSearchParams(new URL(url).search);
+            return urlParams.get('v');
+        }
+
+        // Function to copy text to clipboard
+        function copyText(elementId) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            const dummyTextArea = document.createElement("textarea");
+            document.body.appendChild(dummyTextArea);
+            dummyTextArea.value = textToCopy;
+            dummyTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummyTextArea);
+            alert("Copied to clipboard!");
+        }
+    </script>
+    <footer>
+        <span>&copy; 2024 Help of Life</span> <!-- Copyright text with color changing animation -->
+    </footer>
+</body>
+</html>
+

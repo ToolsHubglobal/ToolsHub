@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="icon"/> 
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="shortcut icon"/>
+    <title>Tools Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #212121;
+            z-index: 1000;
+        }
+
+        .central {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+            box-shadow: 0.5em 1em 1em blue,
+                -0.5em 0.5em 1em lime,
+                0.5em -0.5em 1em cyan,
+                -0.5em -0.5em 1em yellow;
+        }
+
+        .external-shadow {
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0.5em 0.5em 3em blue,
+                -0.5em 0.5em 3em lime,
+                0.5em -0.5em 3em cyan,
+                -0.5em -0.5em 3em yellow;
+            z-index: 999;
+            animation: rotate 3s linear infinite;
+        }
+
+        .intern {
+            position: absolute;
+            color: white;
+            z-index: 9999;
+        }
+
+        .intern::before {
+            content: "100%";
+            animation: percent 2s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes percent {
+            0% {
+                content: '0%';
+            }
+
+            25% {
+                content: '25%';
+            }
+
+            33% {
+                content: '33%';
+            }
+
+            42% {
+                content: '42%';
+            }
+
+            51% {
+                content: '51%';
+            }
+
+            67% {
+                content: '67%';
+            }
+
+            74% {
+                content: '74%';
+            }
+
+            75% {
+                content: '75%';
+            }
+
+            86% {
+                content: '86%';
+            }
+
+            95% {
+                content: '95%';
+            }
+
+            98% {
+                content: '98%';
+            }
+
+            99% {
+                content: '99%';
+            }
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative; /* Added for centering QR code */
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            width: 200px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            position: relative; /* Added to position the tool name */
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .tool-card .tool-name {
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            color: #fff; /* Text color */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite; /* Animation for color changing */
+        }
+
+        /* Keyframes for the color changing animation */
+        @keyframes changeColor {
+            0% {
+                background-color: red; /* Start background color */
+                color: white; /* Start text color */
+            }
+
+            17% {
+                background-color: green; /* Green background color */
+                color: black; /* Black text color */
+            }
+
+            33% {
+                background-color: blue; /* Blue background color */
+                color: orange; /* Orange text color */
+            }
+
+            50% {
+                background-color: orange; /* Orange background color */
+                color: blue; /* Blue text color */
+            }
+
+            67% {
+                background-color: black; /* Black background color */
+                color: green; /* Green text color */
+            }
+
+            83% {
+                background-color: white; /* White background color */
+                color: red; /* Red text color */
+            }
+
+            100% {
+                background-color: red; /* End background color (same as start) */
+                color: white; /* End text color (same as start) */
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="loader">
+    <div class="intern"></div>
+    <div class="external-shadow">
+        <div class="central"></div>
+    </div>
+</div>
+
+<header>
+    <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Tools Hub">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="background" id="background"></div>
+
+<div class="container">
+    <h2>Our Tools</h2>
+    <div class="tools">
+	<a href="ytextractor.html">
+        <div class="tool-card">
+            <img src="https://via.placeholder.com/250" alt="Tool Image">
+            <div class="tool-name">YT Extractor</div>
+        </div>
+	<a href="#">
+        <div class="tool-card">
+            <img src="https://via.placeholder.com/250" alt="Tool Image">
+            <div class="tool-name">Tool 2</div>
+        </div>
+	<a href="#">
+        <div class="tool-card">
+            <img src="https://via.placeholder.com/250" alt="Tool Image">
+            <div class="tool-name">Tool 3</div>
+       
+        </div>
+        <!-- Add more tool cards here -->
+    </div>
+</div>
+
+<script>
+    // Function to generate floating objects
+    function generateFloatingObjects() {
+        var background = document.getElementById("background");
+        var numObjects = 50; // Number of floating objects
+
+        for (var i = 0; i < numObjects; i++) {
+            var floatingObject = document.createElement("div");
+            floatingObject.className = "floating-object";
+            floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+            floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+            floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+            background.appendChild(floatingObject);
+        }
+    }
+
+    // Call the function to generate floating objects when the page loads
+    window.onload = function () {
+        // Simulate loading time (you can remove this in a real scenario)
+        setTimeout(function () {
+            document.querySelector('.loader').style.display = 'none';
+        }, 2000); // Adjust the timeout as per your content loading time
+
+        generateFloatingObjects();
+    };
+</script>
+
+<footer>
+    <span>&copy; 2024 Tools Hub</span> <!-- Copyright text with color changing animation -->
+</footer>
+
+</body>
+</html>

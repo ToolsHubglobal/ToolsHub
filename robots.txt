@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toolshubglobal.github.io/ToolsHub/sitemap.xml

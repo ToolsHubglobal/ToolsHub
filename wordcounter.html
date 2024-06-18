@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analyzer Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        #results div {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text Analyzer Tool</h1>
+        <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+        <div id="results">
+            <div id="wordCount">Word Count: 0</div>
+            <div id="sentenceCount">Sentence Count: 0</div>
+            <div id="lineCount">Line Count: 0</div>
+            <div id="characterCount">Character Count: 0</div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('textInput').addEventListener('input', function () {
+            const text = this.value;
+
+            // Word count
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            const wordCount = words.length;
+
+            // Sentence count
+            const sentences = text.match(/[^.!?]*[.!?]/g) || [];
+            const sentenceCount = sentences.length;
+
+            // Line count
+            const lines = text.split(/\n/).filter(line => line.length > 0);
+            const lineCount = lines.length;
+
+            // Character count (excluding spaces)
+            const characters = text.replace(/\s/g, '');
+            const characterCount = characters.length;
+
+            document.getElementById('wordCount').innerText = `Word Count: ${wordCount}`;
+            document.getElementById('sentenceCount').innerText = `Sentence Count: ${sentenceCount}`;
+            document.getElementById('lineCount').innerText = `Line Count: ${lineCount}`;
+            document.getElementById('characterCount').innerText = `Character Count: ${characterCount}`;
+        });
+    </script>
+</body>
+</html>

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="icon"/> 
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="shortcut icon"/>
+	<link rel="canonical" href="https://toolshubglobal.github.io/ToolsHub/keyword.html">
     <title>Keyword Research Tool</title>
     <style>
         body {
@@ -204,6 +207,8 @@
         <div class="keyword-info" id="keywordInfo" style="display: none;">
             <div class="header">Keyword Suggestions</div>
             <div class="keyword-list" id="keywordList"></div>
+            <div class="header">SEO Percentage</div>
+            <p id="seoPercentage"></p>
         </div>
     </div>
 
@@ -231,48 +236,45 @@
             loader.style.display = 'none';
         };
 
-        // Function to fetch keyword suggestions using Google Ads API
-        async function fetchKeywordInfo() {
+        // Function to fetch keyword suggestions using a random SEO percentage
+        function fetchKeywordInfo() {
             const keyword = document.getElementById('keywordInput').value.trim();
             if (!keyword) {
                 alert('Please enter a keyword.');
                 return;
             }
 
-            const apiKey = 'YOUR_GOOGLE_API_KEY'; // Replace with your Google API Key
-            const apiUrl = `https://ads.google.com/aw/api/keywordplanner/v2/ideas/search`;
+            // Generate a random SEO percentage between 1 and 100
+            const randomSEO = Math.floor(Math.random() * 100) + 1;
 
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${apiKey}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        "query": keyword,
-                        "language": "en",
-                        "geoTargetConstants": ["US"]
-                    })
-                });
+            // Display random SEO percentage in the UI
+            const seoPercentage = document.getElementById('seoPercentage');
+            seoPercentage.textContent = `SEO Percentage: ${randomSEO}%`;
 
-                const data = await response.json();
-                if (data.error) {
-                    throw new Error(data.error.message);
-                }
+            // Show keyword info section
+            const keywordInfo = document.getElementById('keywordInfo');
+            keywordInfo.style.display = 'block';
 
-                // Process keyword suggestions
-                const suggestions = data.keywordIdeas.map(item => item.text);
+            // Simulate fetching keyword suggestions (optional step)
+            // In a real application, you would fetch keyword suggestions from an API here.
+            simulateFetchingKeywordSuggestions(keyword);
+        }
+
+        // Function to simulate fetching keyword suggestions (for demonstration)
+        function simulateFetchingKeywordSuggestions(keyword) {
+            // Simulating a delay for fetching data (1.5 seconds)
+            setTimeout(() => {
+                const suggestions = [
+                    `${keyword} to 95%`,
+                    `${keyword} ? 80%`,
+                    `${keyword}  .50%`
+                ];
                 displayKeywordSuggestions(suggestions);
-            } catch (error) {
-                console.error('Error fetching keyword suggestions:', error);
-                alert('Failed to fetch keyword suggestions. Please try again.');
-            }
+            }, 1500);
         }
 
         // Function to display keyword suggestions in the UI
         function displayKeywordSuggestions(suggestions) {
-            const keywordInfo = document.getElementById('keywordInfo');
             const keywordList = document.getElementById('keywordList');
 
             // Clear previous results
@@ -285,9 +287,6 @@
                 listItem.textContent = keyword;
                 keywordList.appendChild(listItem);
             });
-
-            // Show keyword info section
-            keywordInfo.style.display = 'block';
         }
     </script>
 

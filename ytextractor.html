@@ -460,6 +460,9 @@
             document.body.removeChild(dummyTextArea);
             alert("Copied to clipboard!");
         }
+         document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
     </script>
     <footer>
         <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span> <!-- Copyright text with color changing animation -->

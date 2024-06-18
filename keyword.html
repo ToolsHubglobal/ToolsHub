@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword Research Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Set background color for body */
+            color: #fff; /* Set text color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for background color */
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .keyword-info {
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333; /* Text color inside the keyword info section */
+        }
+
+        .header {
+            font-weight: bold;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .keyword-list {
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .keyword-list-item {
+            margin-bottom: 5px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite; /* Animation for color changing */
+        }
+
+        @keyframes changeColor {
+            0% {
+                background-color: red; /* Start background color */
+                color: white; /* Start text color */
+            }
+            17% {
+                background-color: green; /* Green background color */
+                color: black; /* Black text color */
+            }
+            33% {
+                background-color: blue; /* Blue background color */
+                color: orange; /* Orange text color */
+            }
+            50% {
+                background-color: orange; /* Orange background color */
+                color: blue; /* Blue text color */
+            }
+            67% {
+                background-color: black; /* Black background color */
+                color: green; /* Green text color */
+            }
+            83% {
+                background-color: white; /* White background color */
+                color: red; /* Red text color */
+            }
+            100% {
+                background-color: red; /* End background color (same as start) */
+                color: white; /* End text color (same as start) */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="loader">
+        <div class="intern"></div>
+        <div class="external-shadow">
+            <div class="central"></div>
+        </div>
+    </div>
+    <!-- End of Preloader -->
+
+    <header>
+        <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Help of Life" width="54" height="50">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="background" id="background"></div>
+    <div class="container">
+        <h1>Keyword Research Tool</h1>
+        <input type="text" id="keywordInput" placeholder="Enter a keyword">
+        <button onclick="fetchKeywordInfo()">Search</button>
+
+        <div class="keyword-info" id="keywordInfo" style="display: none;">
+            <div class="header">Keyword Suggestions</div>
+            <div class="keyword-list" id="keywordList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to generate floating objects
+        function generateFloatingObjects() {
+            var background = document.getElementById("background");
+            var numObjects = 50; // Number of floating objects
+
+            for (var i = 0; i < numObjects; i++) {
+                var floatingObject = document.createElement("div");
+                floatingObject.className = "floating-object";
+                floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+                floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+                floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+                background.appendChild(floatingObject);
+            }
+        }
+
+        // Call the function to generate floating objects when the page loads
+        window.onload = function() {
+            generateFloatingObjects();
+            // Hide the loader once the page content is fully loaded
+            var loader = document.querySelector('.loader');
+            loader.style.display = 'none';
+        };
+
+        // Function to fetch keyword suggestions using Google Ads API
+        async function fetchKeywordInfo() {
+            const keyword = document.getElementById('keywordInput').value.trim();
+            if (!keyword) {
+                alert('Please enter a keyword.');
+                return;
+            }
+
+            const apiKey = 'YOUR_GOOGLE_API_KEY'; // Replace with your Google API Key
+            const apiUrl = `https://ads.google.com/aw/api/keywordplanner/v2/ideas/search`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "query": keyword,
+                        "language": "en",
+                        "geoTargetConstants": ["US"]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.error) {
+                    throw new Error(data.error.message);
+                }
+
+                // Process keyword suggestions
+                const suggestions = data.keywordIdeas.map(item => item.text);
+                displayKeywordSuggestions(suggestions);
+            } catch (error) {
+                console.error('Error fetching keyword suggestions:', error);
+                alert('Failed to fetch keyword suggestions. Please try again.');
+            }
+        }
+
+        // Function to display keyword suggestions in the UI
+        function displayKeywordSuggestions(suggestions) {
+            const keywordInfo = document.getElementById('keywordInfo');
+            const keywordList = document.getElementById('keywordList');
+
+            // Clear previous results
+            keywordList.innerHTML = '';
+
+            // Display keyword suggestions
+            suggestions.forEach(keyword => {
+                const listItem = document.createElement('div');
+                listItem.className = 'keyword-list-item';
+                listItem.textContent = keyword;
+                keywordList.appendChild(listItem);
+            });
+
+            // Show keyword info section
+            keywordInfo.style.display = 'block';
+        }
+    </script>
+
+    <footer>
+        <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span>
+    </footer>
+</body>
+</html>

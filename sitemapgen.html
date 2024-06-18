@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="icon"/> 
+    <link href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon" rel="shortcut icon"/>
+	  <link rel="canonical" href="https://toolshubglobal.github.io/ToolsHub/sitemapgen.html">
+
+    <title>Generate Sitemap</title>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+       header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative; /* Added for centering QR code */
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite; /* Animation for color changing */
+        }
+           @keyframes changeColor {
+            0% {
+                background-color: red; /* Start background color */
+                color: white; /* Start text color */
+            }
+
+            17% {
+                background-color: green; /* Green background color */
+                color: black; /* Black text color */
+            }
+
+            33% {
+                background-color: blue; /* Blue background color */
+                color: orange; /* Orange text color */
+            }
+
+            50% {
+                background-color: orange; /* Orange background color */
+                color: blue; /* Blue text color */
+            }
+
+            67% {
+                background-color: black; /* Black background color */
+                color: green; /* Green text color */
+            }
+
+            83% {
+                background-color: white; /* White background color */
+                color: red; /* Red text color */
+            }
+
+            100% {
+                background-color: red; /* End background color (same as start) */
+                color: white; /* End text color (same as start) */
+            }
+        }
+    </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Tools Hub">
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <div class="background" id="background"></div>
+    <div class="container">
+        <h1>Generate Sitemap</h1>
+        <form id="sitemapForm">
+            <label for="url">Enter URL:</label><br>
+            <input type="url" id="url" name="url" required><br><br>
+            <button type="submit">Generate Sitemap</button>
+        </form>
+        <div id="result" class="hidden">
+            <h2>Sitemap XML:</h2>
+            <textarea id="sitemapXml" rows="10" readonly></textarea><br>
+            <button id="copyButton">Copy XML</button>
+            <a id="downloadLink" style="display: none;" download="sitemap.xml"><button id="downloadButton">Download XML</button></a>
+        </div>
+    </div>
+
+    <footer>
+    <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span> <!-- Copyright text with color changing animation -->
+    </footer>
+
+    <script>
+        document.getElementById('sitemapForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the entered URL
+            var url = document.getElementById('url').value.trim();
+
+            if (!url) {
+                alert('Please enter a valid URL.');
+                return;
+            }
+
+            // Generate the sitemap XML
+            var currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+            var sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>${url}</loc>
+        <lastmod>${currentDate}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>`;
+
+            // Display the result
+            var sitemapTextarea = document.getElementById('sitemapXml');
+            sitemapTextarea.value = sitemapXml;
+            document.getElementById('result').classList.remove('hidden');
+
+            // Enable copy button
+            var copyButton = document.getElementById('copyButton');
+            copyButton.addEventListener('click', function() {
+                sitemapTextarea.select();
+                document.execCommand('copy');
+                alert('Copied to clipboard!');
+            });
+
+            // Enable download button
+            var downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = 'data:text/xml;charset=utf-8,' + encodeURIComponent(sitemapXml);
+            downloadLink.style.display = 'inline';
+        });
+      
+          // Function to generate floating objects
+          function generateFloatingObjects() {
+              var background = document.getElementById("background");
+              var numObjects = 50; // Number of floating objects
+      
+              for (var i = 0; i < numObjects; i++) {
+                  var floatingObject = document.createElement("div");
+                  floatingObject.className = "floating-object";
+                  floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+                  floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+                  floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+                  background.appendChild(floatingObject);
+              }
+          }
+      
+          // Call the function to generate floating objects when the page loads
+          window.onload = function () {
+              // Simulate loading time (you can remove this in a real scenario)
+              setTimeout(function () {
+                  document.querySelector('.loader').style.display = 'none';
+              }, 2000); // Adjust the timeout as per your content loading time
+      
+              generateFloatingObjects();
+          };
+    </script>
+</body>
+</html>

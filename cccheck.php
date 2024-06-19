@@ -298,7 +298,7 @@ fieldset[disabled] .btn-danger.focus {
 <body>
 <p class="head">Credit Card Checker</p>
 
-<form method="post" action="putangina/api.php" role="form" id="form">
+<form method="post" action="api.php" role="form" id="form">
 <div class="alert alert-danger text-center info" style="display: none"></div>
 <div class="box-title"><h1>Card Checker</h1></div>
 <div class="box-body">

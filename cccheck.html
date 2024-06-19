@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CC Checker</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<style>
+    body { background-color: #222; color: #fff; }
+    .container { margin-top: 50px; }
+    .result { margin-top: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">Credit Card Checker</h1>
+    <form id="ccForm">
+        <div class="mb-3">
+            <label for="cc" class="form-label">Card Numbers</label>
+            <textarea class="form-control" id="cc" name="cc" rows="10" placeholder="53012724539xxxxx|05|2022|653" required></textarea>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Check</button>
+        </div>
+    </form>
+    <div class="result">
+        <h3>Results</h3>
+        <div id="live" class="alert alert-success">Live: <span>0</span></div>
+        <div id="die" class="alert alert-danger">Die: <span>0</span></div>
+        <div id="unknown" class="alert alert-warning">Unknown: <span>0</span></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#ccForm').on('submit', function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        
+        $.ajax({
+            url: 'api.php',
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    $('#live span').text(response.live);
+                    $('#die span').text(response.die);
+                    $('#unknown span').text(response.unknown);
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('An error occurred while processing your request.');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

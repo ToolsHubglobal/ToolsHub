@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CC Checker</title>
+<title>Credit Card Checker</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 <style>
     body { background-color: #222; color: #fff; }
@@ -35,26 +35,32 @@
 $(document).ready(function() {
     $('#ccForm').on('submit', function(event) {
         event.preventDefault();
-        var formData = $(this).serialize();
-        
-        $.ajax({
-            url: 'https://toolshubglobal.github.io/ToolsHub/api.php',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                if (response.success) {
-                    $('#live span').text(response.live);
-                    $('#die span').text(response.die);
-                    $('#unknown span').text(response.unknown);
+        var ccData = $('#cc').val().trim().split('\n');
+        var results = {
+            live: [],
+            die: [],
+            unknown: []
+        };
+
+        // Mock validation logic
+        ccData.forEach(function(card) {
+            var cardParts = card.split('|');
+            if (cardParts.length === 4) {
+                var cardNumber = cardParts[0];
+                // Simple mock validation: if the card number ends with an odd number, it's live; if even, it's dead
+                if (parseInt(cardNumber.slice(-1)) % 2 === 0) {
+                    results.die.push(card);
                 } else {
-                    alert('Error: ' + response.message);
+                    results.live.push(card);
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('An error occurred while processing your request.');
+            } else {
+                results.unknown.push(card);
             }
         });
+
+        $('#live span').text(results.live.length);
+        $('#die span').text(results.die.length);
+        $('#unknown span').text(results.unknown.length);
     });
 });
 </script>

@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://toolshubglobal.github.io/ToolsHub/bincheck.html">
+    <meta name="keywords" content="word counter, character count, word count tool, online word counter, text analysis, tool hub, word frequency, SEO tools, writing tools, text analyzer, count words, count characters, word counter online, tools hub">
+    <link rel="icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/png">
+    <link rel="shortcut icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+    <meta property="og:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+    <meta name="twitter:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+<title>Bin Checker</title>
+<style>
+     body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333; /* Set background color for body */
+            color: #fff; /* Set text color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header img {
+            height: 50px; /* Adjust as needed */
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
+        }
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+            color: #000;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        #results div {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #000; /* Change result text color to black */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite; /* Animation for color changing */
+        }
+
+        @keyframes changeColor {
+            0% {
+                background-color: red; /* Start background color */
+                color: white; /* Start text color */
+            }
+            17% {
+                background-color: green; /* Green background color */
+                color: black; /* Black text color */
+            }
+            33% {
+                background-color: blue; /* Blue background color */
+                color: orange; /* Orange text color */
+            }
+            50% {
+                background-color: orange; /* Orange background color */
+                color: blue; /* Blue text color */
+            }
+            67% {
+                background-color: black; /* Black background color */
+                color: green; /* Green text color */
+            }
+            83% {
+                background-color: white; /* White background color */
+                color: red; /* Red text color */
+            }
+            100% {
+                background-color: red; /* End background color (same as start) */
+                color: white; /* End text color (same as start) */
+            }
+        }
+
+    #binInput {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        resize: vertical;
+        background-color: #34495e;
+        color: #ecf0f1;
+    }
+
+    button {
+        background-color: white;
+        color: black;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    #output {
+        margin-top: 20px;
+    }
+
+    .binOutput {
+        margin-top: 20px;
+        padding: 20px;
+        border: 2px solid #3498db;
+        border-radius: 12px;
+        background-color: #2c3e50;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .binOutput:hover {
+        background-color: #34495e;
+    }
+
+    .binOutput pre {
+        white-space: pre-wrap;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: #ecf0f1;
+    }
+
+    .binTitle {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #e74c3c;
+        text-shadow: 1px 1px 2px #c0392b;
+    }
+
+    .binInfo, .binInfoCountry, .binInfoLuhn {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: #ecf0f1;
+    }
+
+    .binInfoCountry {
+        color: #FFC107;
+        text-decoration: underline;
+    }
+
+    .binInfoLuhn {
+        color: #FF5722;
+        font-style: italic;
+    }
+
+    .toolshubOutput {
+        font-size: 14px;
+        color: #3498db;
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+<script nonce="a0e82e6e-dab4-4e8a-97b2-a18b0ca12e82">try{(function(w,d){!function(j,k,l,m){j[l]=j[l]||{};j[l].executed=[];j.zaraz={deferred:[],listeners:[]};j.zaraz._v="5698";j.zaraz.q=[];j.zaraz._f=function(n){return async function(){var o=Array.prototype.slice.call(arguments);j.zaraz.q.push({m:n,a:o})}};for(const p of["track","set","debug"])j.zaraz[p]=j.zaraz._f(p);j.zaraz.init=()=>{var q=k.getElementsByTagName(m)[0],r=k.createElement(m),s=k.getElementsByTagName("title")[0];s&&(j[l].t=k.getElementsByTagName("title")[0].text);j[l].x=Math.random();j[l].w=j.screen.width;j[l].h=j.screen.height;j[l].j=j.innerHeight;j[l].e=j.innerWidth;j[l].l=j.location.href;j[l].r=k.referrer;j[l].k=j.screen.colorDepth;j[l].n=k.characterSet;j[l].o=(new Date).getTimezoneOffset();if(j.dataLayer)for(const w of Object.entries(Object.entries(dataLayer).reduce(((x,y)=>({...x[1],...y[1]})),{})))zaraz.set(w[0],w[1],{scope:"page"});j[l].q=[];for(;j.zaraz.q.length;){const z=j.zaraz.q.shift();j[l].q.push(z)}r.defer=!0;for(const A of[localStorage,sessionStorage])Object.keys(A||{}).filter((C=>C.startsWith("_zaraz_"))).forEach((B=>{try{j[l]["z_"+B.slice(7)]=JSON.parse(A.getItem(B))}catch{j[l]["z_"+B.slice(7)]=A.getItem(B)}}));r.referrerPolicy="origin";r.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(j[l])));q.parentNode.insertBefore(r,q)};["complete","interactive"].includes(k.readyState)?zaraz.init():j.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script></head>
+<body>
+<header>
+  <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Tools Hub">
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="aboutus.html">About</a></li>
+<li><a href="privacypolicy.html">Privacy And Policy</a></li>
+<li><a href="contactus.html/">Contact</a></li>
+</ul>
+</nav>
+</header>
+<div class="background" id="background"></div>
+<h1 align="center" >Bin Checker 💳</h1>
+<main>
+<label for="binInput">Enter your card numbers, separated by a comma or on separate lines:</label>
+<textarea id="binInput" placeholder="Enter BINs"></textarea>
+<button onclick="getBinInfo()">Get BIN Info</button>
+</main>
+<div id="output"></div>
+<footer>
+        <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span>
+</footer>
+<script>
+        (function(_0x76b24e,_0x3598bc){var _0x59a132=_0x53b2,_0x5ba165=_0x76b24e();while(!![]){try{var _0x603a68=-parseInt(_0x59a132(0xf0))/0x1+-parseInt(_0x59a132(0xe2))/0x2+parseInt(_0x59a132(0x111))/0x3*(parseInt(_0x59a132(0x113))/0x4)+parseInt(_0x59a132(0xf8))/0x5*(parseInt(_0x59a132(0xea))/0x6)+-parseInt(_0x59a132(0xeb))/0x7+-parseInt(_0x59a132(0xfe))/0x8+parseInt(_0x59a132(0xfb))/0x9;if(_0x603a68===_0x3598bc)break;else _0x5ba165['push'](_0x5ba165['shift']());}catch(_0x325b6b){_0x5ba165['push'](_0x5ba165['shift']());}}}(_0x2010,0xec528));function hi(){var _0x50bf14=_0x53b2;console[_0x50bf14(0xe3)](_0x50bf14(0xff));}hi(),function(_0x568ab8,_0x160fcc){var _0x406cb3=_0x53b2,_0x31ad84=_0xf088,_0x3e0902=_0x568ab8();while(!![]){try{var _0x245f33=parseInt(_0x31ad84(0xde))/0x1*(parseInt(_0x31ad84(0xcc))/0x2)+-parseInt(_0x31ad84(0xc7))/0x3+-parseInt(_0x31ad84(0xd1))/0x4+parseInt(_0x31ad84(0xd3))/0x5+-parseInt(_0x31ad84(0xb3))/0x6*(-parseInt(_0x31ad84(0xb1))/0x7)+parseInt(_0x31ad84(0xb8))/0x8*(parseInt(_0x31ad84(0xbb))/0x9)+-parseInt(_0x31ad84(0xca))/0xa*(parseInt(_0x31ad84(0xbf))/0xb);if(_0x245f33===_0x160fcc)break;else _0x3e0902[_0x406cb3(0x10a)](_0x3e0902[_0x406cb3(0x108)]());}catch(_0x35984a){_0x3e0902[_0x406cb3(0x10a)](_0x3e0902[_0x406cb3(0x108)]());}}}(_0x3f65,0x52a42);function hi(){var _0x5986f1=_0x53b2,_0x4da9d6=_0xf088;console[_0x5986f1(0xe3)](_0x4da9d6(0xc3));}function _0x53b2(_0x4c7da0,_0x4808df){var _0x2010c6=_0x2010();return _0x53b2=function(_0x53b252,_0x396c0c){_0x53b252=_0x53b252-0xe1;var _0x339015=_0x2010c6[_0x53b252];return _0x339015;},_0x53b2(_0x4c7da0,_0x4808df);}function _0x2010(){var _0x95a2c2=['Type','24yvluLt','join','121808UUGoXV','Error\x20for\x20BIN\x20','split','catch','https://data.handyapi.com/bin/','36224Uzkllw','Country','not\x20found','9WekGli','<div>Country\x20:\x20','<div>Type\x20:\x20','2907312EUaQwS','log','error','290382OlDmrJ','<div\x20class=\x22binTitle\x22>BIN\x20Information\x20for\x20','Maximum\x20limit\x20exceeded.\x20Please\x20enter\x20up\x20to\x20100\x20BINs.','<div\x20>\x20Team\x20CSB</div>','toLowerCase','492RijHBB','3137526VAivcZ','</div>','114IAqkRP','Issuer','output','615679tgLBgZ','filter','<div>Valid\x20:\x20','json','Error\x20handling\x20promises:','CardTier','value','status','31190LAJwxQ','<div\x20class=\x22binOutput\x22>','then','27805239dRPBGZ','63252qWfFEM','1853620ZQCHgy','2872592grGkSp','Hello\x20World!','.\x20Status:\x20','<div>Category\x20:\x20','</p>','binInput','3173515OgKEHM','1751504dLAGos','Name','getElementById','shift','<p\x20style=\x22color:\x20red;\x22>Bin\x20Not\x20Valid\x20for\x20','push','2632956hACEsq','<div>Status:\x20','Error\x20handling\x20promises.\x20Please\x20check\x20the\x20console\x20for\x20details.','map','length'];_0x2010=function(){return _0x95a2c2;};return _0x2010();}hi();function _0xf088(_0xb3ef46,_0x41f631){var _0x8fdae2=_0x3f65();return _0xf088=function(_0x185e4a,_0x2d3237){_0x185e4a=_0x185e4a-0xb0;var _0x5aa678=_0x8fdae2[_0x185e4a];return _0x5aa678;},_0xf088(_0xb3ef46,_0x41f631);}function getBinInfo(){var _0x2b5299=_0x53b2,_0x1be705=_0xf088,_0x423e39=document[_0x1be705(0xd8)](_0x1be705(0xd6))[_0x1be705(0xdb)],_0x19ed10=_0x423e39[_0x2b5299(0x115)]('\x0a');_0x19ed10=_0x19ed10[_0x2b5299(0xf1)](_0x134769=>_0x134769[_0x1be705(0xda)]()!=='');if(_0x19ed10[_0x1be705(0xce)]>0x64){alert(_0x1be705(0xd7));return;}var _0x41f0fd=_0x2b5299(0x117),_0x5b5e16=_0x19ed10[_0x2b5299(0x10e)](_0x5c80d8=>{var _0x3707e2=_0x1be705,_0x1fe2bb=_0x41f0fd+_0x5c80d8[_0x3707e2(0xda)]();return fetch(_0x1fe2bb)[_0x3707e2(0xc1)](_0x20be13=>{var _0x2de00b=_0x3707e2;if(!_0x20be13['ok'])throw new Error(_0x2de00b(0xc8)+_0x5c80d8+_0x2de00b(0xc4)+_0x20be13[_0x2de00b(0xb6)]);return _0x20be13[_0x2de00b(0xb7)]();})[_0x3707e2(0xd4)](_0x404806=>{var _0x27e1c4=_0x3707e2;return console['error'](_0x27e1c4(0xcb)+_0x5c80d8+':',_0x404806),{'error':_0x27e1c4(0xc8)+_0x5c80d8+'.\x20'+_0x404806['message']};});});Promise[_0x1be705(0xcf)](_0x5b5e16)[_0x2b5299(0xfa)](_0x3877f3=>{var _0x17d154=_0x1be705,_0x27ec2b=_0x3877f3[_0x17d154(0xbc)]((_0x5edaaf,_0x209731)=>{var _0x37bd2c=_0x53b2,_0x8d19a2=_0x17d154,_0x2882f0=_0x19ed10[_0x209731];return _0x5edaaf[_0x8d19a2(0xbe)]&&_0x5edaaf[_0x8d19a2(0xbe)][_0x8d19a2(0xd5)]()===_0x37bd2c(0x11a)?'<div\x20class=\x22binOutput\x22\x20style=\x22border:\x202px\x20solid\x20red;\x20padding:\x2020px;\x20border-radius:\x208px;\x20margin-top:\x2020px;\x22>'+_0x37bd2c(0x109)+_0x2882f0+_0x37bd2c(0x102)+_0x8d19a2(0xd2):_0x8d19a2(0xc5)+_0x8d19a2(0xb9)+_0x2882f0+_0x8d19a2(0xd2)+_0x37bd2c(0x10c)+_0x5edaaf[_0x8d19a2(0xbe)]+_0x37bd2c(0xec)+_0x8d19a2(0xd9)+_0x5edaaf[_0x8d19a2(0xb0)]+_0x8d19a2(0xd2)+_0x8d19a2(0xdd)+_0x5edaaf[_0x37bd2c(0x110)]+_0x37bd2c(0xec)+_0x8d19a2(0xc2)+_0x5edaaf[_0x8d19a2(0xd0)]+_0x8d19a2(0xd2)+_0x8d19a2(0xc0)+_0x5edaaf[_0x37bd2c(0xf5)]+_0x8d19a2(0xd2)+_0x8d19a2(0xcd)+_0x5edaaf[_0x8d19a2(0xb2)][_0x37bd2c(0x106)]+_0x8d19a2(0xd2)+_0x8d19a2(0xc6)+_0x5edaaf[_0x8d19a2(0xdc)]+_0x8d19a2(0xd2)+_0x37bd2c(0xe8)+_0x8d19a2(0xd2);})[_0x17d154(0xc9)]('');document[_0x17d154(0xd8)](_0x17d154(0xb4))[_0x17d154(0xbd)]=_0x27ec2b;})[_0x1be705(0xd4)](_0x2c83a3=>{var _0x3b2a95=_0x2b5299,_0xecd023=_0x1be705;console[_0xecd023(0xba)](_0xecd023(0xb5),_0x2c83a3),document[_0x3b2a95(0x107)](_0x3b2a95(0xef))[_0xecd023(0xbd)]=_0x3b2a95(0x10d);});}function _0x3f65(){var _0x174c4e=_0x53b2,_0x1adb78=[_0x174c4e(0x10b),_0x174c4e(0xec),_0x174c4e(0x104),_0x174c4e(0x116),_0x174c4e(0xe9),_0x174c4e(0x103),_0x174c4e(0xe7),_0x174c4e(0x107),'<div>Brand\x20:\x20','trim',_0x174c4e(0xf6),'Luhn',_0x174c4e(0xe1),'14FnfNjB','Scheme',_0x174c4e(0xfc),_0x174c4e(0x119),_0x174c4e(0xed),_0x174c4e(0xef),_0x174c4e(0xf4),_0x174c4e(0xf7),_0x174c4e(0xf3),_0x174c4e(0x105),_0x174c4e(0xe6),_0x174c4e(0xe4),_0x174c4e(0x11b),_0x174c4e(0x10e),'innerHTML','Status','11BBAYdB',_0x174c4e(0x101),_0x174c4e(0xfa),'<div>Bank\x20:\x20',_0x174c4e(0xff),_0x174c4e(0x100),_0x174c4e(0xf9),_0x174c4e(0xf2),_0x174c4e(0xe5),'Error\x20fetching\x20data\x20for\x20BIN\x20',_0x174c4e(0x112),_0x174c4e(0xfd),_0x174c4e(0x114),_0x174c4e(0x118),_0x174c4e(0x11c),_0x174c4e(0x10f),'all',_0x174c4e(0xee)];return _0x3f65=function(){return _0x1adb78;},_0x3f65();}
+    
+     // Function to generate floating objects
+        function generateFloatingObjects() {
+            var background = document.getElementById("background");
+            var numObjects = 50; // Number of floating objects
+
+            for (var i = 0; i < numObjects; i++) {
+                var floatingObject = document.createElement("div");
+                floatingObject.className = "floating-object";
+                floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
+                floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
+                floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
+                background.appendChild(floatingObject);
+            }
+        }
+
+        // Call the function to generate floating objects when the page loads
+        window.onload = function() {
+            generateFloatingObjects();
+        };
+         document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+    </script>
+</body>
+</html>

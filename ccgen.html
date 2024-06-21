@@ -5,142 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://toolshubglobal.github.io/ToolsHub/ccgen.html">
     <meta name="keywords" content="credit card generator, generate credit card, fake credit card generator, online credit card generator, credit card validator, Tools Hub, credit card numbers generator, credit card generator with cvv, credit card generator with money, valid credit card generator, random credit card generator">
-php
-Copy code
-<link rel="icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/png">
-<link rel="shortcut icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon">
-<link rel="apple-touch-icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
-<meta property="og:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
-<meta name="twitter:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
-<title>Credit Card Generator</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #333; /* Set background color for body */
-        color: #fff; /* Set text color */
-        overflow-x: hidden; /* Prevent horizontal scroll */
-    }
-
-    header {
-        padding: 20px 0;
-        text-align: center;
-    }
-
-    header img {
-        height: 50px; /* Adjust as needed */
-        width: auto;
-        display: block;
-        margin: 0 auto;
-    }
-
-    nav {
-        margin-top: 20px;
-    }
-
-    nav ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    nav ul li {
-        display: inline;
-        margin-right: 20px;
-    }
-
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    nav ul li a:hover {
-        text-decoration: underline;
-    }
-
-    .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, #6495ED, #FFFFFF);
-        z-index: -1;
-    }
-
-    .floating-object {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 50%;
-        animation: float 5s infinite ease-in-out;
-        z-index: -1;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translateY(0);
+    <link rel="icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/png">
+    <link rel="shortcut icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+    <meta property="og:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+    <meta name="twitter:image" content="https://i.ibb.co/Fs2nhp0/image-removebg-preview-194x194.png">
+    <title>Credit Card Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: #fff;
+            overflow-x: hidden;
         }
-        50% {
-            transform: translateY(-20px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
 
-    .container {
-        max-width: 500px;
-        margin: 0 auto;
-        text-align: center;
-        padding: 20px;
-        position: relative;
-    }
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
 
-    footer {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 10px 0;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        animation: changeColor 10s infinite; /* Animation for color changing */
-    }
+        header img {
+            height: 50px;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-    @keyframes changeColor {
-        0% {
-            background-color: red; /* Start background color */
-            color: white; /* Start text color */
+        nav {
+            margin-top: 20px;
         }
-        17% {
-            background-color: green; /* Green background color */
-            color: black; /* Black text color */
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-        33% {
-            background-color: blue; /* Blue background color */
-            color: orange; /* Orange text color */
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
         }
-        50% {
-            background-color: orange; /* Orange background color */
-            color: blue; /* Blue text color */
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
         }
-        67% {
-            background-color: black; /* Black background color */
-            color: green; /* Green text color */
+
+        nav ul li a:hover {
+            text-decoration: underline;
         }
-        83% {
-            background-color: white; /* White background color */
-            color: red; /* Red text color */
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #6495ED, #FFFFFF);
+            z-index: -1;
         }
-        100% {
-            background-color: red; /* End background color (same as start) */
-            color: white; /* End text color (same as start) */
+
+        .floating-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 5s infinite ease-in-out;
+            z-index: -1;
         }
-    }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: changeColor 10s infinite;
+        }
+
+        @keyframes changeColor {
+            0% {
+                background-color: red;
+                color: white;
+            }
+            17% {
+                background-color: green;
+                color: black;
+            }
+            33% {
+                background-color: blue;
+                color: orange;
+            }
+            50% {
+                background-color: orange;
+                color: blue;
+            }
+            67% {
+                background-color: black;
+                color: green;
+            }
+            83% {
+                background-color: white;
+                color: red;
+            }
+            100% {
+                background-color: red;
+                color: white;
+            }
+        }
 
         h1 {
             color: #333;
@@ -155,65 +153,65 @@ Copy code
             margin-bottom: 10px;
         }
             
-    input[type="text"], input[type="number"], select {
-        width: calc(100% - 20px);
-        padding: 8px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
+        input[type="text"], input[type="number"], select {
+            width: calc(100% - 20px);
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
     
-    button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 4px;
-        margin-top: 10px;
-    }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
     
-    button:hover {
-        background-color: #0056b3;
-    }
+        button:hover {
+            background-color: #0056b3;
+        }
     
-    #generatedCards {
-        margin-top: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #f9f9f9;
-        text-align: left;
-        max-height: 500px;
-        overflow-y: auto;
-    }
+        #generatedCards {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            text-align: left;
+            max-height: 500px;
+            overflow-y: auto;
+        }
     
-    .generatedCard {
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background-color: #000000;
-    }
+        .generatedCard {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #000000;
+        }
     
-    .copyButton {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        padding: 5px 10px;
-        border-radius: 4px;
-        margin-top: 10px;
-    }
+        .copyButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
     
-    .copyButton:hover {
-        background-color: #45a049;
-    }
-</style>
+        .copyButton:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <header>
         <img src="https://i.ibb.co/WshLfPJ/image-removebg-preview.png" alt="Help of Life">
         <nav>
             <ul>
@@ -229,167 +227,153 @@ Copy code
         <form id="ccGenForm">
             <label for="bin">Enter BIN:</label>
             <input type="text" id="bin" name="bin" maxlength="11" placeholder="Enter 11-digit BIN" required>
-php
-Copy code
-        <label for="month">Month:</label>
-        <select id="month" name="month">
-            <option value="auto">Auto</option>
-            <option value="01">01 - January</option>
-            <option value="02">02 - February</option>
-            <option value="03">03 - March</option>
-            <option value="04">04 - April</option>
-            <option value="05">05 - May</option>
-            <option value="06">06 - June</option>
-            <option value="07">07 - July</option>
-            <option value="08">08 - August</option>
-            <option value="09">09 - September</option>
-            <option value="10">10 - October</option>
-            <option value="11">11 - November</option>
-            <option value="12">12 - December</option>
-        </select>
-        
-        <label for="year">Year:</label>
-        <select id="year" name="year">
-            <option value="auto">Auto</option>
-            <!-- Generate options for years from current year to 2050 -->
-            <!-- Adjust 'max' attribute of 'year' input to 2050 -->
-            <script>
-                const currentYear = new Date().getFullYear();
-                for (let year = currentYear; year <= 2050; year++) {
-                    document.write(`<option value="${year}">${year}</option>`);
-                }
-            </script>
-        </select>
-        
-        <label for="amount">Amount of cards:</label>
-        <input type="number" id="amount" name="amount" min="1" max="10000" value="1" required>
-        
-        <label for="customCVC">Custom CVC:</label>
-        <input type="text" id="customCVC" name="customCVC" maxlength="4" placeholder="Custom CVC (Optional)">
-        
-        <button type="submit">Generate Cards</button>
-        <button type="button" id="copyAllButton" class="copyButton">Copy All Cards</button>
-    </form>
-    <div id="generatedCards">
-        <!-- Generated card details will be shown here -->
+            <label for="month">Month:</label>
+            <select id="month" name="month">
+                <option value="auto">Auto</option>
+                <option value="01">01 - January</option>
+                <option value="02">02 - February</option>
+                <option value="03">03 - March</option>
+                <option value="04">04 - April</option>
+                <option value="05">05 - May</option>
+                <option value="06">06 - June</option>
+                <option value="07">07 - July</option>
+                <option value="08">08 - August</option>
+                <option value="09">09 - September</option>
+                <option value="10">10 - October</option>
+                <option value="11">11 - November</option>
+                <option value="12">12 - December</option>
+            </select>
+            <label for="year">Year:</label>
+            <select id="year" name="year">
+                <option value="auto">Auto</option>
+                <script>
+                    const currentYear = new Date().getFullYear();
+                    for (let year = currentYear; year <= 2050; year++) {
+                        document.write(`<option value="${year}">${year}</option>`);
+                    }
+                </script>
+            </select>
+            <label for="amount">Amount of cards:</label>
+            <input type="number" id="amount" name="amount" min="1" max="10000" value="1" required>
+            <label for="customCVC">Custom CVC:</label>
+            <input type="text" id="customCVC" name="customCVC" maxlength="4" placeholder="Custom CVC (Optional)">
+            <button type="submit">Generate Cards</button>
+            <button type="button" id="copyAllButton" class="copyButton">Copy All Cards</button>
+        </form>
+        <div id="generatedCards">
+            <!-- Generated card details will be shown here -->
+        </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('ccGenForm');
-        const generatedCardsContainer = document.getElementById('generatedCards');
-        const copyAllButton = document.getElementById('copyAllButton');
-        
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('ccGenForm');
+            const generatedCardsContainer = document.getElementById('generatedCards');
+            const copyAllButton = document.getElementById('copyAllButton');
             
-            const bin = form.elements['bin'].value.trim();
-            const amount = parseInt(form.elements['amount'].value, 10);
-            let month = form.elements['month'].value;
-            let year = form.elements['year'].value.trim();
-            const customCVC = form.elements['customCVC'].value.trim();
-            
-            if (bin.length !== 11 || isNaN(bin)) {
-                alert('Please enter a valid 11-digit number for BIN.');
-                return;
-            }
-            
-            if (month === 'auto') {
-                // Auto-generate month if not provided
-                const currentDate = new Date();
-                month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Adjust to 2-digit format
-            }
-            
-            if (year === 'auto') {
-                // Auto-generate year if not provided
-                year = new Date().getFullYear().toString().slice(-2);
-            }
-            
-            generateCards(bin, month, year, amount, customCVC);
-        });
-        
-        copyAllButton.addEventListener('click', function() {
-            const cards = document.querySelectorAll('.generatedCard p');
-            let cardsText = '';
-            cards.forEach((card, index) => {
-                if (index > 0) {
-                    cardsText += '\n'; // Separate cards with newline
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const bin = form.elements['bin'].value.trim();
+                const amount = parseInt(form.elements['amount'].value, 10);
+                const customCVC = form.elements['customCVC'].value.trim();
+                
+                if (bin.length !== 11 || isNaN(bin)) {
+                    alert('Please enter a valid 11-digit number for BIN.');
+                    return;
                 }
-                cardsText += card.innerText.trim(); // Append card details
+                
+                generateCards(bin, amount, customCVC);
             });
             
-            copyToClipboard(cardsText);
-        });
-        
-        function generateCards(bin, month, year, amount, customCVC) {
-            let generatedCardsHTML = '';
-            
-            for (let i = 0; i < amount; i++) {
-                let cvc = customCVC || generateRandomCVC();
-                let cardNumber = generateCardNumber(bin, month, year, cvc);
+            copyAllButton.addEventListener('click', function() {
+                const cards = document.querySelectorAll('.generatedCard p');
+                let cardsText = '';
+                cards.forEach((card, index) => {
+                    if (index > 0) {
+                        cardsText += '\n';
+                    }
+                    cardsText += card.innerText.trim();
+                });
                 
-                generatedCardsHTML += `
-                    <div class="generatedCard">
-                        <p>${cardNumber}</p>
-                    </div>
-                `;
+                copyToClipboard(cardsText);
+            });
+            
+            function generateCards(bin, amount, customCVC) {
+                let generatedCardsHTML = '';
+                
+                for (let i = 0; i < amount; i++) {
+                    let month = form.elements['month'].value;
+                    let year = form.elements['year'].value.trim();
+                    
+                    if (month === 'auto') {
+                        month = ('0' + (Math.floor(Math.random() * 12) + 1)).slice(-2);
+                    }
+                    
+                    if (year === 'auto') {
+                        year = Math.floor(Math.random() * (2050 - currentYear + 1) + currentYear).toString();
+                    }
+                    
+                    let cvc = customCVC || generateRandomCVC();
+                    let cardNumber = generateCardNumber(bin, month, year, cvc);
+                    
+                    generatedCardsHTML += `
+                        <div class="generatedCard">
+                            <p>${cardNumber}</p>
+                        </div>
+                    `;
+                }
+                
+                generatedCardsContainer.innerHTML = generatedCardsHTML;
             }
             
-            generatedCardsContainer.innerHTML = generatedCardsHTML;
-        }
+            function generateCardNumber(bin, month, year, cvc) {
+                const separator = "|";
+                let generatedNumber = bin.trim();
         
-        function generateCardNumber(bin, month, year, cvc) {
-            const separator = "|"; // Separator as pipe |
-            let generatedNumber = bin.trim();
-    
-            // Generate 5 random digits
-            for (let i = 0; i < 5; i++) {
-                generatedNumber += Math.floor(Math.random() * 10);
+                for (let i = 0; i < 5; i++) {
+                    generatedNumber += Math.floor(Math.random() * 10);
+                }
+                
+                generatedNumber += separator + month + separator + year + separator + cvc;
+        
+                return generatedNumber;
             }
             
-            generatedNumber += separator + month + separator + year + separator + cvc;
-    
-            return generatedNumber;
-        }
-        
-        function generateRandomCVC() {
-            // Generate a random 3-digit CVC code
-            return Math.floor(100 + Math.random() * 900).toString();
-        }
-        
-        function copyToClipboard(text) {
-            const tempInput = document.createElement('textarea');
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('All cards copied to clipboard!');
-        }
-    });
-     // Function to generate floating objects
-    function generateFloatingObjects() {
-        var background = document.getElementById("background");
-        var numObjects = 50; // Number of floating objects
+            function generateRandomCVC() {
+                return Math.floor(100 + Math.random() * 900).toString();
+            }
+            
+            function copyToClipboard(text) {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = text;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                alert('All cards copied to clipboard!');
+            }
+        });
 
-        for (var i = 0; i < numObjects; i++) {
-            var floatingObject = document.createElement("div");
-            floatingObject.className = "floating-object";
-            floatingObject.style.top = Math.random() * 100 + "%"; // Random top position
-            floatingObject.style.left = Math.random() * 100 + "%"; // Random left position
-            floatingObject.style.animationDelay = Math.random() * 10 + "s"; // Random animation delay
-            background.appendChild(floatingObject);
-        }
-    }
+        function generateFloatingObjects() {
+            var background = document.getElementById("background");
+            var numObjects = 50;
 
-    // Call the function to generate floating objects when the page loads
-    window.onload = function() {
-        generateFloatingObjects();
-    };
-     
-</script>
-<footer>
-    <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span>
-</footer>
+            for (var i = 0; i < numObjects; i++) {
+                var floatingObject = document.createElement("div");
+                floatingObject.className = "floating-object";
+                floatingObject.style.top = Math.random() * 100 + "%";
+                floatingObject.style.left = Math.random() * 100 + "%";
+                floatingObject.style.animationDelay = Math.random() * 10 + "s";
+                background.appendChild(floatingObject);
+            }
+        }
+
+        window.onload = function() {
+            generateFloatingObjects();
+        };
+    </script>
+    <footer>
+        <span>Copyright &copy; 2024 Tools Hub All rights reserved.</span>
+    </footer>
 </body>
 </html>
